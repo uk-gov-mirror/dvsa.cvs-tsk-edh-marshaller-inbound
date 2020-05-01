@@ -23,6 +23,18 @@
     "package": "mkdir ${ZIP_NAME} && cp package.json package-lock.json ${ZIP_NAME}/ && cp -r .build/src/* ${ZIP_NAME}/ && cd ${ZIP_NAME} && npm ci --production && rm package.json package-lock.json && zip -qr ../${ZIP_NAME}.zip ."
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.51",
+    "@types/js-yaml": "^3.12.3",
+    "@types/node": "^13.13.4",
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "aws-lambda": "^1.0.6",
+    "aws-sdk": "^2.667.0",
+    "aws-xray-sdk": "^3.0.0",
+    "js-yaml": "^3.13.1",
+    "node-yaml": "^3.2.0",
+    "openapi-enforcer": "^1.10.3",
+    "path-parser": "^6.1.0"
   }
 }

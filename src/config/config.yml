@@ -1,0 +1,21 @@
+functions:
+  - testStationsCreate:
+      method: POST
+      path: /test-stations/{+proxy}
+      proxy: :testStationId
+      function: testStation
+      event: apigateway
+  - testStationsCreate:
+      method: PUT
+      path: /test-stations/{+proxy}
+      proxy: :testStationId
+      function: testStation
+      event: apigateway
+serverless:
+  basePath: /${BRANCH}
+  port: 3024
+targets:
+  test-stations:
+    queueName: cvs-edh-dispatcher-test-results-${BRANCH}-queue
+    swaggerSpecFile: API_Test_Stations_EDH->CVS_v1.yaml
+    schemaItem: testStation
