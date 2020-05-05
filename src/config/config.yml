@@ -1,15 +1,15 @@
 functions:
-  - testStationsCreate:
+  - createTestStation:
       method: POST
       path: /test-stations/{+proxy}
       proxy: :testStationId
-      function: testStation
+      function: createTestStation
       event: apigateway
-  - testStationsCreate:
+  - updateTestStation:
       method: PUT
       path: /test-stations/{+proxy}
       proxy: :testStationId
-      function: testStation
+      function: updateTestStation
       event: apigateway
 serverless:
   basePath: /${BRANCH}

@@ -1,0 +1,42 @@
+service:
+  name: cvs-tsk-edh-marshaller-inbound
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+  - serverless-plugin-tracing
+
+provider:
+  name: aws
+  runtime: nodejs10.20.1
+  tracing: true # enable tracing
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "xray:PutTraceSegments"
+        - "xray:PutTelemetryRecords"
+      Resource:
+        - "*"
+
+functions:
+  getTestStations:
+    handler: src/handler.handler
+    events:
+      - http:
+          path: /test-stations/{testStationId}
+          method: post
+          request:
+            parameters:
+              paths:
+                testStationId: true
+      - http:
+          path: /test-stations/{testStationId}
+          method: put
+          request:
+            parameters:
+              paths:
+                testStationId: true
+
+custom:
+  serverless-offline:
+    port: 3004

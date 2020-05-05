@@ -1,0 +1,18 @@
+{
+  "testStationAccessNotes": "Phasellus",
+  "testStationAddress": "224 Tennyson",
+  "testStationContactNumber": "+33 111 111 9783",
+  "testStationEmails": [
+    "demo@nonprod.cvs.dvsacloud.uk"
+  ],
+  "testStationGeneralNotes": "Maecenas",
+  "testStationId": "1",
+  "testStationLatitude": 43.4945737,
+  "testStationLongitude": 5.8978018,
+  "testStationName": "fixers and wreckers",
+  "testStationPNumber": "87-111111",
+  "testStationPostcode": "AA111-2452",
+  "testStationStatus": "active",
+  "testStationTown": "Paris 20",
+  "testStationType": "gvts"
+}
