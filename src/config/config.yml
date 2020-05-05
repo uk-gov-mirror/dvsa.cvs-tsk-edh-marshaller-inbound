@@ -16,6 +16,6 @@ serverless:
   port: 3024
 targets:
   test-stations:
-    queueName: cvs-edh-dispatcher-test-results-${BRANCH}-queue
+    queueName: cvs-edh-receiver-${BRANCH}-queue
     swaggerSpecFile: API_Test_Stations_EDH->CVS_v1.yaml
     schemaItem: testStation
