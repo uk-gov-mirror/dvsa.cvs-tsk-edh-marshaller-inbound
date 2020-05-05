@@ -25,7 +25,7 @@ export class MarshallingService {
       body: eventBody
     }
 
-    await this.sqService.sendMessage(JSON.stringify(body), target.queue).catch(
+    await this.sqService.sendMessage(JSON.stringify(body), target.queueName).catch(
       (error) => {
         console.log("Failed to submit queue message: ", error)
         throw new Error(error)
@@ -34,8 +34,7 @@ export class MarshallingService {
   }
 
   public async isValidMessageBody(body: any, target: ITarget) {
-    const config: ISecretConfig = await Configuration.getInstance().getSecretConfig();
-    if(config.validation) {
+    if(process.env.validation === "true") {
       const enforcer = await Enforcer(`./src/resources/${target.swaggerSpecFile}`);
       const schema = enforcer.components.schemas[target.schemaItem];
       const deserialised = schema.deserialize(body);

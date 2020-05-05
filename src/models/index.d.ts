@@ -18,7 +18,7 @@ export interface ISecretConfig {
 }
 
 export interface ITarget {
-  queue: string;
+  queueName: string;
   swaggerSpecFile: string;
   schemaItem: string;
 }

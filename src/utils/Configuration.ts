@@ -88,37 +88,6 @@ class Configuration {
     public getTargets(): ITargetConfig {
         return this.config.targets;
     }
-
-    /**
-     * Retrieves the Secrets config
-     * @returns ISecretConfig
-     */
-    public async getSecretConfig(): Promise<ISecretConfig> {
-        if (!this.secretConfig) {
-            this.secretConfig = await this.setSecrets();
-        }
-        return this.secretConfig;
-    }
-
-    /**
-     * Reads the secret yaml file from SecretManager or local file.
-     */
-    private async setSecrets(): Promise<ISecretConfig> {
-        if (process.env.SECRET_NAME) {
-            const req: GetSecretValueRequest = {
-                SecretId: process.env.SECRET_NAME
-            };
-            const resp: GetSecretValueResponse = await this.secretsClient.getSecretValue(req).promise();
-            try {
-                return await safeLoad(resp.SecretString as string);
-            } catch (e) {
-                throw new Error(ERROR.SECRET_STRING_EMPTY);
-            }
-        } else {
-            console.warn(ERROR.SECRET_ENV_VAR_NOT_SET);
-            throw new Error(ERROR.SECRET_ENV_VAR_NOT_SET);
-        }
-    }
 }
 
 export { Configuration };

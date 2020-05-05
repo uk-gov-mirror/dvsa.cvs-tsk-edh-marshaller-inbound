@@ -3,37 +3,32 @@ import {Configuration} from "../../src/utils/Configuration";
 import {MarshallingService} from "../../src/services/MarshallingService";
 import demoStation from "../resources/demoStation.json"
 describe("isValidMessageBody", () => {
+  let origProcEnv: any;
   beforeAll(() => {
     jest.clearAllMocks();
     jest.resetAllMocks();
     jest.restoreAllMocks();
+    origProcEnv = process.env
   });
   const target: ITarget = {
-    queue: "",
+    queueName: "",
     swaggerSpecFile: "API_Test_Stations_EDH->CVS_v1.yaml",
     schemaItem: "testStation"
   };
   describe("When validation = true", () => {
-    let secretMock: any;
     afterEach(() => {
       jest.clearAllMocks();
     });
-    afterAll(() => {
-      secretMock.mockRestore();
-    });
     beforeAll(() => {
-      secretMock = jest.spyOn(Configuration.prototype, "getSecretConfig").mockResolvedValue(Promise.resolve({
-        baseUrl: "",
-        apiKey: "",
-        host: "",
-        validation: "true"
-      }));
-    });
+      process.env.validation = "true";
+    })
+    afterAll(() => {
+      process.env = origProcEnv;
+    })
 
     it("returns false when evaluating a completely invalid record against a valid spec", async () => {
       const svc = new MarshallingService();
       const output = await svc.isValidMessageBody({something: "invalid"}, target);
-      expect(secretMock).toHaveBeenCalled();
       expect(output).toEqual(false);
     });
     it("returns true when evaluating a 'good' record against a valid spec", async () => {
@@ -46,30 +41,24 @@ describe("isValidMessageBody", () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
+    beforeAll(() => {
+      process.env.validation = "false";
+    })
 
     it("always returns true", async () => {
-      const secretMock = jest.spyOn(Configuration.prototype, "getSecretConfig").mockResolvedValue(Promise.resolve({
-        baseUrl: "",
-        apiKey: "",
-        host: "",
-        validation: false
-      }));
       const svc = new MarshallingService();
       const output = await svc.isValidMessageBody({something: "invalid"}, target);
       expect(output).toEqual(true);
-      secretMock.mockRestore();
     });
   });
-  describe("when validation is not set in secrets", () => {
+  describe("when validation is not set in environment variables", () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
     it("always returns true", async () => {
-      const secretMock = jest.spyOn(Configuration.prototype, "getSecretConfig").mockResolvedValue(Promise.resolve({}));
       const svc = new MarshallingService();
       const output = await svc.isValidMessageBody({something: "invalid"}, target);
       expect(output).toEqual(true);
-      secretMock.mockRestore();
     });
   });
 });
