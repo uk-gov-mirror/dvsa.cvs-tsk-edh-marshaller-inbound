@@ -1,10 +1,9 @@
 // @ts-ignore
 import * as yml from "node-yaml";
-import {IFunctionConfig, ISecretConfig, ITargetConfig} from "../models";
-import SecretsManager, { GetSecretValueRequest, GetSecretValueResponse } from "aws-sdk/clients/secretsmanager";
+import {IFunctionConfig, ITargetConfig} from "../models";
+import SecretsManager from "aws-sdk/clients/secretsmanager";
 import * as AWSXray from "aws-xray-sdk";
 import { ERROR } from "../models/enums";
-import { safeLoad } from "js-yaml";
 import {Handler} from "aws-lambda";
 
 /**
@@ -14,7 +13,6 @@ class Configuration {
 
     private static instance: Configuration;
     private readonly config: any;
-    private secretConfig: any;
     private secretsClient: SecretsManager;
 
     private constructor(configPath: string) {

@@ -1,5 +1,4 @@
 import {ITarget} from "../../src/models";
-import {Configuration} from "../../src/utils/Configuration";
 import {MarshallingService} from "../../src/services/MarshallingService";
 import demoStation from "../resources/demoStation.json"
 describe("isValidMessageBody", () => {
