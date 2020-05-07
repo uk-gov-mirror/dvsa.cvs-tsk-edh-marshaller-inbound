@@ -12,7 +12,7 @@ functions:
       function: updateTestStation
       event: apigateway
 serverless:
-  basePath: /${BRANCH}
+  basePath: /${BRANCH}/:apiVersion
   port: 3024
 targets:
   test-stations:

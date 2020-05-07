@@ -6,7 +6,7 @@ export const createTestStation: Handler = async (event: APIGatewayProxyEvent) =>
   const payload = event.body;
   const testStationId = event.pathParameters?.testStationId;
   const headers = event.headers;
-  console.log("Trace Header: ", headers["X-Amzn-Trace-Id"]);
+  console.log("Trace Header: ", headers?.["X-Amzn-Trace-Id"]);
 
   if (!payload) {
     throw new Error(ERROR.INVALID_PAYLOAD);
@@ -17,5 +17,5 @@ export const createTestStation: Handler = async (event: APIGatewayProxyEvent) =>
   }
 
   const marshallingService = new MarshallingService();
-  return await marshallingService.processRequest(payload, TARGET.TEST_STATIONS, CHANGE.CREATE, testStationId)
+  return await marshallingService.processRequest(payload, TARGET.TEST_STATIONS, CHANGE.CREATE, testStationId);
 }
