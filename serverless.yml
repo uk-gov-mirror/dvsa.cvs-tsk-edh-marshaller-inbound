@@ -23,18 +23,20 @@ functions:
     handler: src/handler.handler
     events:
       - http:
-          path: /test-stations/{testStationId}
+          path: /{apiVersion}/test-stations/{testStationId}
           method: post
           request:
             parameters:
               paths:
+                apiVersion: true
                 testStationId: true
       - http:
-          path: /test-stations/{testStationId}
+          path: /{apiVersion}/test-stations/{testStationId}
           method: put
           request:
             parameters:
               paths:
+                apiVersion: true
                 testStationId: true
 
 custom:

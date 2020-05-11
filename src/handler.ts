@@ -35,10 +35,7 @@ const handler = async (event: any, context: Context) => {
       // Find λ with matching path
       const localPath: Path = new Path(fn.path);
       const remotePath: Path = new Path(`${serverlessConfig.basePath}${fn.path}`); // Remote paths also have environment
-      console.log("Remote path for test: ", remotePath);
-      const remoteTestOutput = remotePath.test(event.path);
-      console.log("Remote test output: ", remoteTestOutput);
-      return (localPath.test(event.path) || remoteTestOutput);
+      return (localPath.test(event.path) || remotePath.test(event.path));
     });
 
   // Exactly one λ should match the above filtering.

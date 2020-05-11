@@ -1,18 +1,18 @@
 functions:
   - createTestStation:
       method: POST
-      path: /test-stations/{+proxy}
+      path: /:apiVersion/test-stations/{+proxy}
       proxy: :testStationId
       function: createTestStation
       event: apigateway
   - updateTestStation:
       method: PUT
-      path: /test-stations/{+proxy}
+      path: /:apiVersion/test-stations/{+proxy}
       proxy: :testStationId
       function: updateTestStation
       event: apigateway
 serverless:
-  basePath: /${BRANCH}/:apiVersion
+  basePath: /${BRANCH}
   port: 3024
 targets:
   test-stations:

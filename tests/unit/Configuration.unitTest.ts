@@ -33,10 +33,10 @@ describe("ConfigurationUtil", () => {
             it("should return the list of specified functions with names and matching paths", () => {
                 expect(funcConfig).toHaveLength(2);
                 expect(funcConfig[0].name).toEqual("createTestStation");
-                expect(funcConfig[0].path).toEqual("/test-stations/:testStationId");
+                expect(funcConfig[0].path).toEqual("/:apiVersion/test-stations/:testStationId");
                 expect(funcConfig[0].method).toEqual("POST");
                 expect(funcConfig[1].name).toEqual("updateTestStation");
-                expect(funcConfig[1].path).toEqual("/test-stations/:testStationId");
+                expect(funcConfig[1].path).toEqual("/:apiVersion/test-stations/:testStationId");
                 expect(funcConfig[1].method).toEqual("PUT");
             });
         });
