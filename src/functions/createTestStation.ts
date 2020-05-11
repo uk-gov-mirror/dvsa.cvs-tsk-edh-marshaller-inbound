@@ -1,6 +1,7 @@
 import {APIGatewayProxyEvent, Handler} from "aws-lambda";
 import {ERROR, TARGET, CHANGE} from "../models/enums";
 import {MarshallingService} from "../services/MarshallingService";
+import {HTTPResponse} from "../models/HTTPResponse";
 
 export const createTestStation: Handler = async (event: APIGatewayProxyEvent) => {
   const payload = event.body;
@@ -17,5 +18,7 @@ export const createTestStation: Handler = async (event: APIGatewayProxyEvent) =>
   }
 
   const marshallingService = new MarshallingService();
-  return await marshallingService.processRequest(payload, TARGET.TEST_STATIONS, CHANGE.CREATE, testStationId);
+  return await marshallingService.processRequest(payload, TARGET.TEST_STATIONS, CHANGE.CREATE, testStationId).then(() => {
+    return new HTTPResponse(202, undefined);
+  });
 }
