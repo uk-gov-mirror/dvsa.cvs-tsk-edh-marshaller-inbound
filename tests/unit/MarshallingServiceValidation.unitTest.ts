@@ -27,11 +27,15 @@ describe("isValidMessageBody", () => {
 
     it("returns false when evaluating a completely invalid record against a valid spec", async () => {
       const svc = new MarshallingService();
+      //@ts-ignore
+      svc.basePath = "./src/resources/";
       const output = await svc.isValidMessageBody({something: "invalid"}, target);
       expect(output).toEqual(false);
     });
     it("returns true when evaluating a 'good' record against a valid spec", async () => {
       const svc = new MarshallingService();
+      //@ts-ignore
+      svc.basePath = "./src/resources/";
       const output = await svc.isValidMessageBody(demoStation, target);
       expect(output).toEqual(true);
     });

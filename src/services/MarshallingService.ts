@@ -8,6 +8,7 @@ import SQS from "aws-sdk/clients/sqs";
 
 export class MarshallingService {
   private sqService: SQService;
+  private basePath: string = "../resources/";
   constructor() {
     this.sqService = new SQService(new SQS())
   }
@@ -35,7 +36,7 @@ export class MarshallingService {
 
   public async isValidMessageBody(body: any, target: ITarget) {
     // if(process.env.validation === "true") {
-      const enforcer = await Enforcer(`./src/resources/${target.swaggerSpecFile}`);
+      const enforcer = await Enforcer(`${this.basePath}${target.swaggerSpecFile}`);
       const schema = enforcer.components.schemas[target.schemaItem];
       const deserialised = schema.deserialize(body);
       const output = schema.validate(deserialised.value);
