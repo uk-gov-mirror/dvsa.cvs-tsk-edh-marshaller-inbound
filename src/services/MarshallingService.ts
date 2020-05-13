@@ -1,7 +1,7 @@
 // @ts-ignore
 import Enforcer from "openapi-enforcer"
 import {Configuration} from "../utils/Configuration";
-import {ISecretConfig, ITarget} from "../models";
+import {ITarget} from "../models";
 import {SQService} from "./SQService";
 import SQS from "aws-sdk/clients/sqs";
 

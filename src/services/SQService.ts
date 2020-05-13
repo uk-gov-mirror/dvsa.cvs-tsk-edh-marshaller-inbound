@@ -1,8 +1,6 @@
 import SQS, {GetQueueUrlResult, MessageBodyAttributeMap, SendMessageResult} from "aws-sdk/clients/sqs";
-import {Configuration} from "../utils/Configuration";
 import {PromiseResult} from "aws-sdk/lib/request";
-import {AWSError, config as AWSConfig, XRay} from "aws-sdk";
-import {ERROR} from "../models/enums";
+import {AWSError} from "aws-sdk";
 // tslint:disable-next-line
 const AWSXRay = require("aws-xray-sdk");
 

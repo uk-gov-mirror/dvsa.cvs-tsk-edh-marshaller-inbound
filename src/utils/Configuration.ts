@@ -17,7 +17,7 @@ class Configuration {
 
     private constructor(configPath: string) {
         this.config = yml.readSync(configPath);
-        this.secretsClient = AWSXray.captureAWSClient(new SecretsManager({ region: "eu-west-1" })) as SecretsManager;
+        this.secretsClient = AWSXray.captureAWSClient(new SecretsManager({ region: "eu-west-1" }));
 
         // Replace environment variable references
         let stringifiedConfig: string = JSON.stringify(this.config);
