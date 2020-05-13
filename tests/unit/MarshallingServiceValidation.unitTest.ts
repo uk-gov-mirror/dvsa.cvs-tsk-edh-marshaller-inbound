@@ -19,7 +19,7 @@ describe("isValidMessageBody", () => {
       jest.clearAllMocks();
     });
     beforeAll(() => {
-      process.env.validation = "true";
+      process.env.VALIDATION = "TRUE";
     })
     afterAll(() => {
       process.env = origProcEnv;
