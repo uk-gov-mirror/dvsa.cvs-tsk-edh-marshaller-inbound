@@ -8,7 +8,7 @@ import SQS from "aws-sdk/clients/sqs";
 
 export class MarshallingService {
   private sqService: SQService;
-  private basePath: string = "../resources/";
+  private basePath: string = "./resources/";
   constructor() {
     this.sqService = new SQService(new SQS())
   }
