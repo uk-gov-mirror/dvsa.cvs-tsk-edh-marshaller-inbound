@@ -35,7 +35,7 @@ export class MarshallingService {
   }
 
   public async isValidMessageBody(body: any, target: ITarget) {
-    // if(process.env.VALIDATION === "TRUE") {
+    if(process.env.VALIDATION === "TRUE") {
       const enforcer = await Enforcer(`${this.basePath}${target.swaggerSpecFile}`);
       const schema = enforcer.components.schemas[target.schemaItem];
       const deserialised = schema.deserialize(body);
@@ -44,7 +44,7 @@ export class MarshallingService {
         console.log("Record failed validation: ", output);
         return false
       }
-    // }
+    }
     return true;
   }
 }

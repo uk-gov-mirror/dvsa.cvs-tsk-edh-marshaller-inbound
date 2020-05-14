@@ -40,28 +40,35 @@ describe("isValidMessageBody", () => {
       expect(output).toEqual(true);
     });
   });
-  // describe("when validation = false", () => {
-  //   afterEach(() => {
-  //     jest.clearAllMocks();
-  //   });
-  //   beforeAll(() => {
-  //     process.env.validation = "false";
-  //   })
-  //
-  //   it("always returns true", async () => {
-  //     const svc = new MarshallingService();
-  //     const output = await svc.isValidMessageBody({something: "invalid"}, target);
-  //     expect(output).toEqual(true);
-  //   });
-  // });
-  // describe("when validation is not set in environment variables", () => {
-  //   afterEach(() => {
-  //     jest.clearAllMocks();
-  //   });
-  //   it("always returns true", async () => {
-  //     const svc = new MarshallingService();
-  //     const output = await svc.isValidMessageBody({something: "invalid"}, target);
-  //     expect(output).toEqual(true);
-  //   });
-  // });
+  describe("when validation = false", () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    beforeAll(() => {
+      process.env.VALIDATION = "false";
+    })
+
+    it("always returns true", async () => {
+      const svc = new MarshallingService();
+      //@ts-ignore
+      svc.basePath = "./src/resources/";
+      const output = await svc.isValidMessageBody({something: "invalid"}, target);
+      expect(output).toEqual(true);
+    });
+  });
+  describe("when validation is not set in environment variables", () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    beforeAll(() => {
+      process.env= origProcEnv;
+    })
+    it("always returns true", async () => {
+      const svc = new MarshallingService();
+      //@ts-ignore
+      svc.basePath = "./src/resources/";
+      const output = await svc.isValidMessageBody({something: "invalid"}, target);
+      expect(output).toEqual(true);
+    });
+  });
 });
