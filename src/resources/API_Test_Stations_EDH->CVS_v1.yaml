@@ -1,0 +1,103 @@
+openapi: 3.0.0
+components:
+  schemas:
+    testStation:
+      type: object
+      additionalProperties: false
+      properties:
+        testStationId:
+          type: string
+        testStationPNumber:
+          type: string
+        testStationStatus:
+          type: string
+          description: When retrieving the test stations list, the data is filtered using this attribute. If status = "active" then the object will be retrieved using the GET method, else it will not be retrieved.
+          nullable: true
+        testStationName:
+          type: string
+        testStationContactNumber:
+          type: string
+        testStationAccessNotes:
+          type: string
+        testStationGeneralNotes:
+          type: string
+        testStationTown:
+          type: string
+        testStationAddress:
+          type: string
+        testStationPostcode:
+          type: string
+        testStationLongitude:
+          type: number
+        testStationLatitude:
+          type: number
+        testStationType:
+          type: string
+          enum:
+            - atf
+            - gvts
+            - hq
+        testStationEmails:
+          type: array
+          items:
+            type: string
+  securitySchemes: {}
+info:
+  title: Synchronise Test Stations API
+  description: This is the API spec for creating and modifying Test Stations
+  version: '1'
+paths:
+  /test-stations/{testStationId}:
+    post:
+      operationId: postTestStation
+      summary: Post Test Station
+      description: create a new test station in CVS DB
+      parameters:
+        - in: path
+          name: testStationId
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 21
+          required: true
+          description: >-
+            The unique identifier for Test Station records, testStationId
+      requestBody:
+        required: true
+        description: The test station to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/testStation'
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Rejected
+    put:
+      operationId: putTestStation
+      summary: Put Test Station
+      description: update a test station record in CVS DB
+      parameters:
+        - in: path
+          name: testStationId
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 21
+          required: true
+          description: >-
+            The unique identifier for Test Station records, testStationId
+      requestBody:
+        required: true
+        description: The test station to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/testStation'
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Rejected
+
