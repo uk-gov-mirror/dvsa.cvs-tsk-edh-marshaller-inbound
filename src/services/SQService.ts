@@ -1,12 +1,12 @@
+import { AWSError } from 'aws-sdk';
 import SQS, {
   GetQueueUrlResult,
   MessageBodyAttributeMap,
   SendMessageResult,
-} from "aws-sdk/clients/sqs";
-import { PromiseResult } from "aws-sdk/lib/request";
-import { AWSError } from "aws-sdk";
+} from 'aws-sdk/clients/sqs';
+import { PromiseResult } from 'aws-sdk/lib/request';
 // tslint:disable-next-line
-const AWSXRay = require("aws-xray-sdk");
+const AWSXRay = require('aws-xray-sdk');
 
 /**
  * Service class for interfacing with the Simple Queue Service
@@ -31,7 +31,7 @@ class SQService {
   public async sendMessage(
     messageBody: string,
     queueName: string,
-    messageAttributes?: MessageBodyAttributeMap
+    messageAttributes?: MessageBodyAttributeMap,
   ): Promise<PromiseResult<SendMessageResult, AWSError>> {
     // Get the queue URL for the provided queue name
     const queueUrlResult: GetQueueUrlResult = await this.sqsClient

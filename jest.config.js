@@ -8,9 +8,10 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
   },
   testMatch: ['**/*.*Test.ts'],
-
   coverageDirectory: './coverage',
   collectCoverage: true,
   testResultsProcessor: 'jest-sonar-reporter',
-  testURL: 'http://localhost',
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
 };
